@@ -95,9 +95,25 @@ bool Snake::move(char key)
 	default:
 		return true;
 	}
+	Point* pre = phead;
+	Point* cur = phead->next;
 
+	while (cur->next != NULL)
+	{
+		pre = pre->next;
+		cur = pre->next;
+	}
+
+	if (cur->x == x && cur->y == y)
+	{
+		isRool = true;
+	}
 	if (wall.getWall(x, y) == '=' || wall.getWall(x, y) == '*')
 	{
+		addPoint(x, y);
+		delPoint();
+		system("cls");
+		wall.draw();
 		cout << "gameOver!" << endl;
 		return false;
 	}
@@ -108,8 +124,52 @@ bool Snake::move(char key)
 	}
 	else
 	{
-		addPoint(x, y);
-		delPoint();
+		if(isRool)
+		{
+			addPoint(x, y);
+			delPoint();
+			wall.setWall(x, y, '@');
+		}
+		else
+		{
+			addPoint(x, y);
+			delPoint();
+		}
+
 	}
 	return true;
+}
+
+int Snake::getSleepTime()
+{
+	int sTime = 0;
+	int size = countList();
+	if (size < 5)
+	{
+		sTime = 300;
+	}
+	else if (size >= 5 && size <= 10)
+	{
+		sTime = 200;
+	}
+	else if (size > 20)
+	{
+		sTime = 50;
+	}
+
+	return sTime;
+
+}
+
+int Snake::countList()
+{
+	int size = 0;
+	Point* curP = phead;
+	while (curP != NULL)
+	{
+		size++;
+		curP = curP->next;
+	}
+
+	return size;
 }

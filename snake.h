@@ -37,6 +37,9 @@ public:
 
 	void addPoint(int x, int y);
 
+	int getSleepTime();
+
+	int countList();
 
 private:
 	Point* phead;

@@ -26,9 +26,9 @@ int main()
 	snake.initSnake();
 
 	//²âÊÔ
+	/*snake.move(snake.UP);
 	snake.move(snake.UP);
-	snake.move(snake.UP);
-	snake.move(snake.LEFT);
+	snake.move(snake.LEFT);*/
 
 	wall.draw();
 
@@ -61,7 +61,8 @@ int main()
 				{
 					system("cls");
 					wall.draw();
-					Sleep(300);  //Ë¯Ãß
+					Sleep(snake.getSleepTime());//Sleep(200);  //Ë¯Ãß
+
 				}
 				else
 				{
